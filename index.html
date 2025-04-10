@@ -3,10 +3,70 @@
 <head>
     <title>Matt Boddie's Portfolio</title>
     <meta name="description" content="A showcase of my work and projects.">
-    <link rel="stylesheet" href="style.css"> </head>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .dropdown {
+            position: absolute;
+            top: 10px; /* Adjust as needed */
+            right: 10px; /* Adjust as needed */
+        }
+
+        .dropdown-button {
+            background-color: #f0f0f0; /* Adjust as needed */
+            color: black; /* Adjust as needed */
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            right: 0; /* Align dropdown to the right */
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #ddd;}
+
+        .dropdown:hover .dropdown-content {display: block;}
+
+        /* Optional styling for the header to accommodate the dropdown */
+        header {
+            position: relative; /* To allow absolute positioning of the dropdown */
+            padding-right: 100px; /* Adjust based on dropdown width */
+        }
+
+        nav {
+            display: none; /* Hide the original navigation */
+        }
+    </style>
+</head>
 <body>
     <header>
         <h1>Welcome to Matt Boddie's Portfolio</h1>
+        <div class="dropdown">
+            <button class="dropdown-button">Menu</button>
+            <div class="dropdown-content">
+                <a href="past.html">Past Projects</a>
+                <a href="future.html">Future Projects</a>
+                <a href="softwares.html">Software</a>
+                <a href="malaria.html">Malaria</a>
+                <a href="templates.html">Templates</a>
+            </div>
+        </div>
     </header>
 
     <nav>
@@ -27,6 +87,27 @@
     <footer>
         <p>&copy; 2025 Matt Boddie. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Optional: You can add JavaScript to make the dropdown toggle on click
+        // instead of just on hover, for better mobile experience.
+        // const dropdown = document.querySelector('.dropdown');
+        // const dropdownButton = document.querySelector('.dropdown-button');
+        // const dropdownContent = document.querySelector('.dropdown-content');
+
+        // if (dropdownButton && dropdownContent) {
+        //     dropdownButton.addEventListener('click', () => {
+        //         dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        //     });
+
+        //     // Close the dropdown if the user clicks outside of it
+        //     window.addEventListener('click', (event) => {
+        //         if (!dropdown.contains(event.target)) {
+        //             dropdownContent.style.display = 'none';
+        //         }
+        //     });
+        // }
+    </script>
 
 </body>
 </html>
