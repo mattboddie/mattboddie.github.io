@@ -90,7 +90,14 @@
             width: 100%; /* Make sections take full width of main */
             box-sizing: border-box; /* Include padding and border in the element's total width and height */
         }
-
+        section img {
+            display: block; /* Make the image a block-level element */
+            margin: 0 auto 10px; /* Center horizontally and add some bottom margin */
+            width: 150px; /* Keep your image width */
+            height: 150px; /* Keep your image height */
+            object-fit: cover; /* Maintain aspect ratio and cover the container */
+            border-radius: 50%; /* Keep the circular shape if you have it in your style.css */
+        }
         /* Style for the contact form section - HIDDEN BY DEFAULT */
         #contact-section {
             display: none; /* Initially hide the contact section */
