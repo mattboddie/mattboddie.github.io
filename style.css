@@ -121,6 +121,7 @@ footer {
     text-align: center;
     padding: 15px;
     font-size: 0.9em;
+    flex-shrink: 0; 
 }
 
 /* You can add more styles here for other elements as you develop your portfolio */
