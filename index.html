@@ -71,45 +71,60 @@
         }
 
         main {
-            flex-grow: 1; /* Allow the main content to take up available vertical space */
-            display: flex; /* Enable flexbox for main content to arrange sections */
-            flex-direction: column; /* Stack sections vertically by default */
-            align-items: center; /* Center content horizontally within main */
+            flex-grow: 1;
+            display: flex; /* Enable flexbox for main content */
+            flex-wrap: wrap; /* Allow items to wrap to the next line */
+            justify-content: center; /* Center items horizontally when there's enough space */
+            align-items: flex-start; /* Align items to the top of the main container */
+            padding: 20px; /* Add some padding around the main content */
         }
 
-        footer {
-            background-color: #f0f0f0; /* Optional: Style your footer */
-            padding: 10px;
-            text-align: center;
+        main > section { /* Target direct children sections of main */
+            padding: 20px;
+            margin-bottom: 20px;
+            max-width: 600px; /* Default max-width for sections */
+            width: 100%;
+            box-sizing: border-box;
+            background-color: white; /* Default background for sections */
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        section {
-            padding: 20px; /* Add some padding to your main content sections */
-            margin-bottom: 20px; /* Add some space between sections */
-            max-width: 600px; /* Limit the width of the content for better readability */
-            width: 100%; /* Make sections take full width of main */
-            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        /* Style for the About Me section to take up roughly a third */
+        main > section:first-child { /* "About Me" section */
+            max-width: 300px; /* Adjust as needed */
+            margin-right: 20px; /* Space to the right if other sections are beside it */
         }
-        section img {
-            display: block; /* Make the image a block-level element */
-            margin: 0 auto 10px; /* Center horizontally and add some bottom margin */
-            width: 150px; /* Keep your image width */
-            height: 150px; /* Keep your image height */
-            object-fit: cover; /* Maintain aspect ratio and cover the container */
-            border-radius: 50%; /* Keep the circular shape if you have it in your style.css */
+
+        /* Styles for the additional complimenting sections */
+        main > section:nth-child(2), /* Section 2 */
+        main > section:nth-child(3), /* Section 3 */
+        main > section:nth-child(4), /* Section 4 */
+        main > section:nth-child(5), /* Section 5 */
+        main > section:nth-child(6), /* Section 6 */
+        main > section:nth-child(7)   /* Contact Me section */
+        {
+            /* They will inherit the default section styles */
+            /* You can add specific styles here if needed */
+            /* For example, to make them a fixed width: */
+            /* max-width: 280px; */
+            margin-right: 20px; /* Add some horizontal space between them */
         }
+
+        /* Remove the right margin from the last item on a row to avoid extra space */
+        main > section:nth-child(2n) { /* Example: Remove from even-numbered sections */
+            /* You might need to adjust this based on your desired layout */
+            /* margin-right: 0; */
+        }
+
         /* Style for the contact form section - HIDDEN BY DEFAULT */
         #contact-section {
             display: none; /* Initially hide the contact section */
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            text-align: left; /* Align form elements to the left */
+            text-align: left;
         }
 
         #contact-section h2 {
-            text-align: center; /* Center the contact form title */
+            text-align: center;
             margin-bottom: 15px;
         }
 
@@ -126,7 +141,7 @@
         #contact-section input[type="text"],
         #contact-section input[type="email"],
         #contact-section textarea {
-            width: calc(100% - 12px); /* Adjust width for padding */
+            width: calc(100% - 12px);
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -134,11 +149,11 @@
         }
 
         #contact-section textarea {
-            resize: vertical; /* Allow vertical resizing of the textarea */
+            resize: vertical;
         }
 
         #contact-section button[type="submit"] {
-            background-color: #007bff; /* Example button color */
+            background-color: #007bff;
             color: white;
             padding: 10px 15px;
             border: none;
@@ -178,6 +193,36 @@
             <h2>About Me</h2>
             <img src="images/profile.png" alt="" width="150" height="150">
             <p>A quick view into past work, interests, and future directions.</p>
+        </section>
+
+        <section>
+            <h2>Skills</h2>
+            <p>List some of your key skills here.</p>
+            <ul>
+                <li>Skill 1</li>
+                <li>Skill 2</li>
+                <li>Skill 3</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Experience</h2>
+            <p>Briefly describe your professional experience.</p>
+        </section>
+
+        <section>
+            <h2>Education</h2>
+            <p>Mention your educational background.</p>
+        </section>
+
+        <section>
+            <h2>Interests</h2>
+            <p>Share some of your personal interests.</p>
+        </section>
+
+        <section>
+            <h2>Portfolio Highlights</h2>
+            <p>Showcase a few key projects or achievements.</p>
         </section>
 
         <section id="contact-section">
@@ -258,7 +303,7 @@
             if (contactForm && contactSection && contactLink) {
                 contactLink.addEventListener('click', function(event) {
                     event.preventDefault(); // Prevent the default jump behavior
-                    contactSection.style.display = contactSection.style.display === 'none' ? 'block' : 'none';
+                    contactSection.style.display = contactSection.style.display === 'none' ? 'block' : 'flex'; /* Use flex to align form elements if needed */
                 });
 
                 contactForm.addEventListener('submit', function(event) {
