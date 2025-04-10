@@ -5,6 +5,7 @@
     <meta name="description" content="A showcase of my work and projects.">
     <link rel="stylesheet" href="style.css">
     <style>
+        /* Existing styles for the dropdown */
         .dropdown {
             position: absolute;
             top: 10px; /* Adjust as needed */
@@ -52,7 +53,6 @@
 
         .dropdown-content a:hover {background-color: #ddd;}
 
-        /* Optional styling for the header to accommodate the dropdown */
         header {
             position: relative; /* To allow absolute positioning of the dropdown */
             padding-right: 100px; /* Adjust based on dropdown width */
@@ -60,6 +60,28 @@
 
         nav {
             display: none; /* Hide the original navigation */
+        }
+
+        /* Styles to push the footer to the bottom */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
+            margin: 0; /* Remove default body margin */
+        }
+
+        main {
+            flex-grow: 1; /* Allow the main content to take up available vertical space */
+        }
+
+        footer {
+            background-color: #f0f0f0; /* Optional: Style your footer */
+            padding: 10px;
+            text-align: center;
+        }
+
+        section {
+            padding: 20px; /* Add some padding to your main content sections */
         }
     </style>
 </head>
@@ -78,20 +100,13 @@
         </div>
     </header>
 
-    <nav>
-        <ul>
-            <li><a href="past.html">Past Projects</a></li>
-            <li><a href="future.html">Future Projects</a></li>
-            <li><a href="softwares.html">Software</a></li>
-            <li><a href="malaria.html">Malaria</a></li>
-            <li><a href="templates.html">Templates</a></li>
-        </ul>
-    </nav>
+    <main>
+        <section>
+            <h2>About Me</h2>
+            <p>This is a brief introduction about Matt Boddie. You can add your personal information here, such as your background, skills, and interests.</p>
+        </section>
 
-    <section>
-        <h2>About Me</h2>
-        <p>This is a brief introduction about Matt Boddie. You can add your personal information here, such as your background, skills, and interests.</p>
-    </section>
+        </main>
 
     <footer>
         <p>&copy; 2025 Matt Boddie. All rights reserved.</p>
