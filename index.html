@@ -79,15 +79,14 @@
             padding: 20px; /* Add some padding around the main content */
         }
 
-        main > section { /* Target direct children sections of main */
-            padding: 20px;
-            margin-bottom: 20px;
-            max-width: 600px; /* Default max-width for sections */
-            width: 100%;
-            box-sizing: border-box;
-            background-color: white; /* Default background for sections */
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+       main > section:first-child img {
+    display: block; /* Make it a block-level element to allow margin auto */
+    margin-left: auto;
+    margin-right: auto; /* Center the image horizontally */
+    border-radius: 50%; /* Make the image circular */
+    object-fit: cover; /* Maintain aspect ratio and cover the circle */
+    width: 150px; /* Set the desired width */
+    height: 150px; /* Set the desired height (should match width for a perfect circle) */
         }
 
         /* Style for the About Me section to take up roughly a third */
