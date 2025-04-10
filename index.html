@@ -91,8 +91,9 @@
             box-sizing: border-box; /* Include padding and border in the element's total width and height */
         }
 
-        /* Style for the contact form section */
+        /* Style for the contact form section - HIDDEN BY DEFAULT */
         #contact-section {
+            display: none; /* Initially hide the contact section */
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -160,7 +161,7 @@
                 <a href="future.html">Future Projects</a>
                 <a href="softwares.html">Software</a>
                 <a href="malaria.html">Malaria</a>
-                <a href="#contact">Contact Me</a>
+                <a href="#contact-section-toggle">Contact Me</a>
             </div>
         </div>
     </header>
@@ -212,7 +213,7 @@
         const dropdownMenu = document.getElementById('dropdownMenu');
         const dropdownContent = document.getElementById('dropdownContent');
         let timeoutId;
-        const delay = 300; // Adjust this value (in milliseconds) to control the delay
+        const delay = 300;
 
         dropdownMenu.addEventListener('mouseenter', () => {
             clearTimeout(timeoutId);
@@ -229,12 +230,10 @@
             }, delay);
         });
 
-        // Prevent the timeout from clearing if the mouse re-enters the dropdown content
         dropdownContent.addEventListener('mouseenter', () => {
             clearTimeout(timeoutId);
         });
 
-        // Restart the timeout if the mouse leaves the dropdown content
         dropdownContent.addEventListener('mouseleave', () => {
             timeoutId = setTimeout(() => {
                 dropdownContent.style.display = 'none';
@@ -246,10 +245,17 @@
         document.addEventListener('DOMContentLoaded', function() {
             const contactForm = document.getElementById('contactForm');
             const formResponse = document.getElementById('form-response');
+            const contactSection = document.getElementById('contact-section');
+            const contactLink = document.querySelector('a[href="#contact-section-toggle"]');
 
-            if (contactForm) {
+            if (contactForm && contactSection && contactLink) {
+                contactLink.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent the default jump behavior
+                    contactSection.style.display = contactSection.style.display === 'none' ? 'block' : 'none';
+                });
+
                 contactForm.addEventListener('submit', function(event) {
-                    event.preventDefault(); // Prevent the default form submission
+                    event.preventDefault();
 
                     fetch(this.action, {
                         method: 'POST',
@@ -262,6 +268,7 @@
                         if (response.ok) {
                             formResponse.textContent = 'Message sent successfully!';
                             contactForm.reset();
+                            contactSection.style.display = 'none'; // Hide form after successful submission
                         } else {
                             return response.json().then(data => {
                                 if (data && data.errors && data.errors.length > 0) {
