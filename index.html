@@ -73,26 +73,35 @@
         main {
             flex-grow: 1;
             display: flex; /* Enable flexbox for main content */
-            flex-wrap: wrap; /* Allow items to wrap to the next line */
-            justify-content: center; /* Center items horizontally when there's enough space */
-            align-items: flex-start; /* Align items to the top of the main container */
+            flex-direction: column; /* Arrange sections vertically */
+            align-items: center; /* Center content horizontally within main */
             padding: 20px; /* Add some padding around the main content */
         }
 
-       main > section:first-child img {
-    display: block; /* Make it a block-level element to allow margin auto */
-    margin-left: auto;
-    margin-right: auto; /* Center the image horizontally */
-    border-radius: 50%; /* Make the image circular */
-    object-fit: cover; /* Maintain aspect ratio and cover the circle */
-    width: 150px; /* Set the desired width */
-    height: 150px; /* Set the desired height (should match width for a perfect circle) */
+        main > section { /* Target direct children sections of main */
+            padding: 20px;
+            margin-bottom: 20px;
+            max-width: 600px; /* Default max-width for sections */
+            width: 100%;
+            box-sizing: border-box;
+            background-color: white; /* Default background for sections */
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* Style for the About Me section to take up roughly a third */
-        main > section:first-child { /* "About Me" section */
-            max-width: 300px; /* Adjust as needed */
-            margin-right: 20px; /* Space to the right if other sections are beside it */
+        main > section:first-child img {
+            display: block; /* Make it a block-level element to allow margin auto */
+            margin-left: auto;
+            margin-right: auto; /* Center the image horizontally */
+            border-radius: 50%; /* Make the image circular */
+            object-fit: cover; /* Maintain aspect ratio and cover the circle */
+            width: 150px; /* Set the desired width */
+            height: 150px; /* Set the desired height (should match width for a perfect circle) */
+        }
+
+        /* Style for the About Me section */
+        main > section:first-child {
+            /* You can adjust max-width if needed, but vertical layout is primary now */
         }
 
         /* Styles for the additional complimenting sections */
@@ -104,16 +113,9 @@
         main > section:nth-child(7)   /* Contact Me section */
         {
             /* They will inherit the default section styles */
-            /* You can add specific styles here if needed */
-            /* For example, to make them a fixed width: */
-            /* max-width: 280px; */
-            margin-right: 20px; /* Add some horizontal space between them */
-        }
-
-        /* Remove the right margin from the last item on a row to avoid extra space */
-        main > section:nth-child(2n) { /* Example: Remove from even-numbered sections */
-            /* You might need to adjust this based on your desired layout */
-            /* margin-right: 0; */
+            /* Adjust max-width if you want to constrain their width */
+            /* max-width: 400px; */
+            margin-right: 0; /* Remove any potential horizontal margin */
         }
 
         /* Style for the contact form section - HIDDEN BY DEFAULT */
