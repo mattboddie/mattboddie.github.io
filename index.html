@@ -1,198 +1,386 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Name</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Matt Boddie — Public health systems &amp; malaria program consulting</title>
+<meta name="description" content="Matt Boddie: systems architecture, data pipelines, and MEL infrastructure for malaria and public health programs. Consulting in malaria, public health information systems, data visualization, and mobile data deployment." />
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <style>
-    /* --- Reset & Base Styles --- */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', sans-serif;
-      color: #1f2937; /* slate-800 */
-      background: #f9fafb; /* gray-50 */
-      line-height: 1.6;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-    a { color: #2563eb; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+<style>
+  :root {
+    --paper: #F1EEE4;
+    --surface: #FBF9F3;
+    --ink: #17241F;
+    --ink-soft: #4C5952;
+    --line: #D9D2BE;
+    --teal: #2C6E5C;
+    --teal-deep: #1E4E41;
+    --amber: #B9752A;
 
-    /* --- Layout --- */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 4rem;
-    }
-    header strong {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      color: #111827; /* gray-900 */
-    }
-    nav a {
-      margin-left: 1.5rem;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: #374151; /* gray-700 */
-    }
-    nav a:hover {
-      color: #2563eb;
-    }
+    --serif: 'Newsreader', Georgia, serif;
+    --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
 
-    section {
-      margin-bottom: 5rem;
-    }
-    h1, h2 {
-      margin-bottom: 1rem;
-    }
-    h1 {
-      font-size: 2.5rem;
-      font-family: 'Playfair Display', serif;
-      margin-bottom: 1.5rem;
-      color: #111827;
-    }
-    h2 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #2563eb;
-      border-bottom: 2px solid #e5e7eb;
-      padding-bottom: 0.5rem;
-      margin-bottom: 2rem;
-    }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* --- Resume Timeline --- */
-    .resume-item {
-      margin-bottom: 1.5rem;
-    }
-    .resume-item h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #111827;
-      margin-bottom: 0.25rem;
-    }
-    .resume-item p {
-      font-size: 0.95rem;
-      color: #4b5563; /* gray-600 */
-    }
+  html { scroll-behavior: smooth; }
 
-    /* --- Portfolio Grid --- */
-    .projects {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-    .project-card {
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      padding: 1.25rem;
-      border-radius: 10px;
-      transition: all 0.2s ease;
-    }
-    .project-card:hover {
-      border-color: #2563eb;
-      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.1);
-    }
-    .project-card h3 {
-      margin-bottom: 0.5rem;
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #111827;
-    }
-    .project-card p {
-      font-size: 0.9rem;
-      color: #4b5563;
-    }
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    /* --- Footer --- */
-    footer {
-      border-top: 1px solid #e5e7eb;
-      padding-top: 2rem;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #6b7280;
-    }
-  </style>
+  a { color: var(--teal-deep); }
+  a:focus-visible,
+  button:focus-visible { outline: 2px solid var(--teal-deep); outline-offset: 3px; }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* ---------- Header ---------- */
+  .site-header {
+    border-bottom: 1px solid var(--line);
+  }
+  .site-header .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding-top: 1.4rem;
+    padding-bottom: 1.4rem;
+  }
+  .wordmark {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  nav { display: flex; gap: 1.6rem; }
+  nav a {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+  nav a:hover { color: var(--teal-deep); }
+
+  section { padding: 4.5rem 0; }
+  section + section { border-top: 1px solid var(--line); }
+
+  h2 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.6rem;
+    margin-bottom: 1.75rem;
+    max-width: 26ch;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero { padding-top: 3.5rem; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.9fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 2.55rem;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    max-width: 14ch;
+  }
+  .hero .lede {
+    margin-top: 1.35rem;
+    max-width: 44ch;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+  }
+  .hero-meta {
+    margin-top: 2.1rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--surface);
+    background: var(--teal-deep);
+    padding: 0.7rem 1.3rem;
+    text-decoration: none;
+    border-radius: 3px;
+  }
+  .btn:hover { background: var(--teal); }
+  .location {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+  }
+  .hero-art { width: 100%; }
+  .hero-art svg { width: 100%; height: auto; display: block; }
+
+  /* ---------- About ---------- */
+  .about p { max-width: 58ch; color: var(--ink-soft); font-size: 1.02rem; }
+  .about p + p { margin-top: 1.1rem; }
+
+  /* ---------- Focus areas ---------- */
+  .focus-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+  .focus-item {
+    border-top: 2px solid var(--ink);
+    padding: 1.1rem 1.4rem 0 0;
+  }
+  .focus-item:not(:first-child) { border-left: 1px solid var(--line); padding-left: 1.4rem; }
+  .focus-item h3 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.12rem;
+    margin-bottom: 0.6rem;
+  }
+  .focus-item p { font-size: 0.94rem; color: var(--ink-soft); }
+
+  /* ---------- Track record ---------- */
+  .timeline { list-style: none; }
+  .timeline li {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: 1.5rem;
+    padding: 1.15rem 0;
+  }
+  .timeline li + li { border-top: 1px solid var(--line); }
+  .timeline .when {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--teal-deep);
+    padding-top: 0.2rem;
+  }
+  .timeline h3 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.08rem;
+    margin-bottom: 0.3rem;
+  }
+  .timeline p { font-size: 0.94rem; color: var(--ink-soft); max-width: 46ch; }
+
+  /* ---------- Selected work ---------- */
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 2.5rem;
+  }
+  .work-item { border-top: 1px solid var(--line); padding-top: 1rem; }
+  .work-item h3 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 0.45rem;
+  }
+  .work-item p { font-size: 0.92rem; color: var(--ink-soft); }
+
+  /* ---------- Contact ---------- */
+  .contact p { max-width: 50ch; color: var(--ink-soft); font-size: 1.02rem; margin-bottom: 1.6rem; }
+  .contact-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+  .contact-links a {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    text-decoration: none;
+    border-bottom: 1px solid var(--teal-deep);
+    padding-bottom: 0.1rem;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 2rem 0 3rem;
+  }
+  footer p { font-size: 0.82rem; color: var(--ink-soft); }
+
+  @media (max-width: 720px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-art { display: none; }
+    .hero h1 { font-size: 2.1rem; max-width: none; }
+    .focus-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+    .focus-item:not(:first-child) { border-left: none; padding-left: 0; }
+    .work-grid { grid-template-columns: 1fr; }
+    .timeline li { grid-template-columns: 1fr; gap: 0.3rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div><strong>Your Name</strong></div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="#top">Matt Boddie</a>
     <nav>
       <a href="#about">About</a>
-      <a href="#resume">Resume</a>
-      <a href="#projects">Projects</a>
+      <a href="#focus">Focus</a>
+      <a href="#track">Background</a>
+      <a href="#work">Work</a>
       <a href="#contact">Contact</a>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <!-- Hero / About -->
-  <section id="about">
-    <h1>Hello, I’m [Your Name]</h1>
-    <p>
-      A short introduction about who you are and what you do. This is
-      your elevator pitch — 2–3 sentences about your skills, focus areas,
-      and what makes you unique.
-    </p>
-  </section>
+<main>
 
-  <!-- Resume -->
-  <section id="resume">
-    <h2>Resume</h2>
-    <div class="resume-item">
-      <h3>Senior Role – Company</h3>
-      <p>2019 – Present · One-liner about your role and impact.</p>
-    </div>
-    <div class="resume-item">
-      <h3>Previous Role – Organization</h3>
-      <p>2015 – 2019 · Another one-liner here.</p>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="projects">
-      <div class="project-card">
-        <h3>Project One</h3>
-        <p>Brief description of what this project is about.</p>
+  <section class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <h1>Public health systems built to hold up in the field.</h1>
+        <p class="lede">I design and run the data infrastructure behind malaria and vector control programs — national DHIS2 platforms, mobile data collection, and the pipelines and dashboards that turn field data into decisions.</p>
+        <div class="hero-meta">
+          <a class="btn" href="#contact">Get in touch</a>
+          <span class="location">Based in the Dominican Republic · working with programs globally</span>
+        </div>
       </div>
-      <div class="project-card">
-        <h3>Project Two</h3>
-        <p>Brief description of what this project is about.</p>
-      </div>
-      <div class="project-card">
-        <h3>Project Three</h3>
-        <p>Brief description of what this project is about.</p>
-      </div>
-      <div class="project-card">
-        <h3>Project Four</h3>
-        <p>Brief description of what this project is about.</p>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="0,190 30,150 55,165 80,95 110,120 140,55 170,80 200,30 230,45 260,10"
+            fill="none" stroke="#2C6E5C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+          <g fill="#B9752A">
+            <circle cx="80" cy="95" r="3.5"></circle>
+            <circle cx="140" cy="55" r="3.5"></circle>
+            <circle cx="200" cy="30" r="3.5"></circle>
+          </g>
+          <line x1="0" y1="190" x2="260" y2="190" stroke="#D9D2BE" stroke-width="1"></line>
+        </svg>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>
-      Get in touch at <a href="mailto:your@email.com">your@email.com</a>
-    </p>
+  <section class="about" id="about">
+    <div class="wrap">
+      <h2>About</h2>
+      <p>For the past decade I've built and run the digital backbone of national malaria programs — starting in the field with the Peace Corps and Abt Associates in Uganda, then as a DHIS2 solutions architect supporting surveillance systems across more than fifteen national PMI programs. Today I'm the systems and MEL technical lead for PMI Evolve.</p>
+      <p>My background sits at the intersection of malaria program work, digital health infrastructure, and evidence generation — I'm as comfortable in a spray campaign's field operations as I am in a database schema or a funder's data request.</p>
+      <p>I'm currently taking on consulting work in malaria and public health program data systems, and in data visualization and mobile data deployment more broadly.</p>
+    </div>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    © <span id="year"></span> Your Name · All rights reserved
-  </footer>
+  <section class="focus" id="focus">
+    <div class="wrap">
+      <h2>Focus areas</h2>
+      <div class="focus-grid">
+        <div class="focus-item">
+          <h3>Malaria &amp; vector control</h3>
+          <p>IRS and ITN campaign data systems, burn-rate and coverage tracking, and field supervision tools that hold up under real campaign conditions.</p>
+        </div>
+        <div class="focus-item">
+          <h3>Public health information systems</h3>
+          <p>DHIS2 architecture and administration, national HMIS integration, platform upgrades, and data pipelines built to run at scale.</p>
+        </div>
+        <div class="focus-item">
+          <h3>Data viz &amp; mobile deployment</h3>
+          <p>Dashboards and reporting built for the people who actually use them, plus XLSForms and mobile data collection for teams working offline and in the field.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <script>
-    // Auto-update year
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  <section class="track" id="track">
+    <div class="wrap">
+      <h2>Background</h2>
+      <ol class="timeline">
+        <li>
+          <span class="when">Peace Corps · Uganda</span>
+          <div>
+            <h3>National Malaria Coordinator</h3>
+            <p>Started in malaria program work at the field level, coordinating malaria control activities within Uganda's Peace Corps program.</p>
+          </div>
+        </li>
+        <li>
+          <span class="when">Abt Associates · Uganda</span>
+          <div>
+            <h3>Indoor residual spraying, field operations</h3>
+            <p>Worked directly on IRS campaign field operations, the same campaigns I now help support with data systems.</p>
+          </div>
+        </li>
+        <li>
+          <span class="when">~10 years</span>
+          <div>
+            <h3>DHIS2 solutions architect</h3>
+            <p>Designed and managed DHIS2 infrastructure for surveillance systems across more than fifteen national PMI vector control programs.</p>
+          </div>
+        </li>
+        <li>
+          <span class="when">Current</span>
+          <div>
+            <h3>PMI Evolve — Systems &amp; MEL technical lead</h3>
+            <p>Technical lead on a Monitoring, Evaluation, and Learning team, covering systems administration, data pipelines, and program evidence infrastructure.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="work" id="work">
+    <div class="wrap">
+      <h2>Selected work</h2>
+      <div class="work-grid">
+        <div class="work-item">
+          <h3>National IRS module integration</h3>
+          <p>Built a customized indoor residual spraying module inside a national ministry of health's DHIS2 instance, ahead of an active spray campaign.</p>
+        </div>
+        <div class="work-item">
+          <h3>Major platform upgrade</h3>
+          <p>Led a national malaria program through a multi-step DHIS2 version upgrade, including breaking-change audits and a phased rollout plan.</p>
+        </div>
+        <div class="work-item">
+          <h3>Campaign burn-rate tracking</h3>
+          <p>Built a near real-time tracking system using DHIS2 program indicators to monitor progress across a 30-day IRS campaign.</p>
+        </div>
+        <div class="work-item">
+          <h3>Field supervision forms</h3>
+          <p>Designed XLSForms for day-of-spray and distribution supervision, built for offline use by field teams.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <h2>Get in touch</h2>
+      <p>If you're running a malaria or public health program and need help with data systems, DHIS2 infrastructure, dashboards, or mobile data collection — I'd like to hear about it.</p>
+      <div class="contact-links">
+        <a href="mailto:matt@mattboddie.com">matt@mattboddie.com</a>
+        <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>&copy; <span id="year"></span> Matt Boddie</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
