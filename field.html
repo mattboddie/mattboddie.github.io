@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Matt Boddie — Public Health Systems</title>
+
+  <meta
+    name="description"
+    content="Matt Boddie builds data systems, digital infrastructure, and field tools for malaria and public health programs."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --paper: #eee8d7;
+      --paper-dark: #ddd4bc;
+      --ink: #171717;
+      --muted: #625f54;
+      --red: #e33b21;
+      --orange: #ef8d18;
+      --blue: #168ca6;
+      --green: #497d46;
+      --yellow: #f0c229;
+      --white: #f8f5e9;
+
+      --display: "Archivo Black", Impact, sans-serif;
+      --mono: "IBM Plex Mono", monospace;
+      --serif: "Libre Baskerville", Georgia, serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(
+          rgba(0,0,0,.045) 0.7px,
+          transparent 0.7px
+        ),
+        var(--paper);
+      background-size: 5px 5px;
+      color: var(--ink);
+      font-family: var(--mono);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      max-width: 1280px;
+      margin: 0 auto;
+      background: var(--paper);
+      min-height: 100vh;
+    }
+
+    .pad {
+      padding-left: 34px;
+      padding-right: 34px;
+    }
+
+    /* ---------------- HEADER ---------------- */
+
+    header {
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .header-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-top: 28px;
+      padding-bottom: 24px;
+    }
+
+    .brand {
+      font-family: var(--display);
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: .78;
+      letter-spacing: -0.055em;
+    }
+
+    .brand small {
+      display: block;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .12em;
+      line-height: 1.4;
+      margin-top: 18px;
+      max-width: 240px;
+    }
+
+    .header-meta {
+      font-size: 11px;
+      line-height: 1.7;
+      text-transform: uppercase;
+      text-align: right;
+      letter-spacing: .08em;
+    }
+
+    .color-bar {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      height: 17px;
+    }
+
+    .color-bar span:nth-child(1) { background: var(--yellow); }
+    .color-bar span:nth-child(2) { background: var(--red); }
+    .color-bar span:nth-child(3) { background: var(--blue); }
+    .color-bar span:nth-child(4) { background: var(--green); }
+
+    nav {
+      display: flex;
+      justify-content: flex-end;
+      gap: 30px;
+      padding: 9px 0;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---------------- GENERAL ---------------- */
+
+    .section {
+      padding-top: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .section-number {
+      color: var(--red);
+      font-family: var(--display);
+      font-size: 21px;
+    }
+
+    .section-rule {
+      height: 1px;
+      background: var(--ink);
+      flex: 1;
+    }
+
+    /* ---------------- HERO ---------------- */
+
+    .hero {
+      padding-top: 34px;
+      padding-bottom: 26px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 28px;
+    }
+
+    .hero h1 {
+      font-family: var(--display);
+      font-size: clamp(3.3rem, 7vw, 7.3rem);
+      line-height: .84;
+      letter-spacing: -.055em;
+      max-width: 850px;
+      text-transform: uppercase;
+    }
+
+    .hero-intro {
+      margin-top: 25px;
+      max-width: 680px;
+      font-family: var(--serif);
+      font-size: 20px;
+      line-height: 1.4;
+    }
+
+    .hero-aside {
+      border-left: 1px solid var(--ink);
+      padding-left: 22px;
+    }
+
+    .hero-aside h3 {
+      font-family: var(--display);
+      font-size: 22px;
+      line-height: .95;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .hero-aside p {
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+
+    .hero-aside .coordinates {
+      border-top: 1px solid var(--ink);
+      padding-top: 12px;
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    .hero-art {
+      margin-top: 30px;
+      height: 170px;
+      border: 1px solid var(--ink);
+      position: relative;
+      overflow: hidden;
+      background: var(--blue);
+    }
+
+    .hero-art::before {
+      content: "";
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 50%;
+      left: 15%;
+      top: -320px;
+    }
+
+    .hero-art::after {
+      content: "FIELD → DATA → DECISION";
+      position: absolute;
+      bottom: 18px;
+      left: 22px;
+      font-family: var(--display);
+      color: var(--white);
+      font-size: 28px;
+      letter-spacing: -.03em;
+    }
+
+    /* ---------------- DATA STRIP ---------------- */
+
+    .data-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--ink);
+    }
+
+    .data-card {
+      padding: 17px;
+      min-height: 125px;
+    }
+
+    .data-card + .data-card {
+      border-left: 1px solid var(--ink);
+    }
+
+    .data-card:nth-child(1) {
+      background: var(--yellow);
+    }
+
+    .data-card:nth-child(2) {
+      background: var(--red);
+      color: var(--white);
+    }
+
+    .data-card:nth-child(3) {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .data-card:nth-child(4) {
+      background: var(--green);
+      color: var(--white);
+    }
+
+    .data-number {
+      font-family: var(--display);
+      font-size: 42px;
+      line-height: 1;
+    }
+
+    .data-label {
+      margin-top: 9px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    /* ---------------- SYSTEM ---------------- */
+
+    .system-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .system-diagram {
+      border: 1px solid var(--ink);
+      padding: 20px;
+      min-height: 330px;
+      background: var(--white);
+    }
+
+    .system-diagram h3 {
+      font-family: var(--display);
+      font-size: 30px;
+      line-height: .9;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+
+    .flow {
+      display: grid;
+      gap: 7px;
+    }
+
+    .flow-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 15px;
+      border: 1px solid var(--ink);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .flow-item:nth-child(1) { background: var(--yellow); }
+    .flow-item:nth-child(2) { background: var(--orange); }
+    .flow-item:nth-child(3) { background: var(--blue); color: white; }
+    .flow-item:nth-child(4) { background: var(--green); color: white; }
+
+    .system-copy {
+      padding-top: 4px;
+    }
+
+    .system-copy h2 {
+      font-family: var(--display);
+      font-size: 48px;
+      line-height: .9;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .system-copy p {
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.5;
+      max-width: 480px;
+    }
+
+    .system-copy ul {
+      list-style: none;
+      margin-top: 25px;
+      border-top: 1px solid var(--ink);
+    }
+
+    .system-copy li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--ink);
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    /* ---------------- WORK ---------------- */
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .work-card {
+      border: 1px solid var(--ink);
+      padding: 20px;
+      min-height: 220px;
+      background: var(--white);
+      position: relative;
+    }
+
+    .work-card:nth-child(2) {
+      background: var(--red);
+      color: var(--white);
+    }
+
+    .work-card:nth-child(3) {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .work-card:nth-child(4) {
+      background: var(--yellow);
+    }
+
+    .work-card .index {
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .work-card h3 {
+      font-family: var(--display);
+      font-size: 30px;
+      line-height: .9;
+      text-transform: uppercase;
+      margin-top: 38px;
+      max-width: 350px;
+    }
+
+    .work-card p {
+      font-family: var(--serif);
+      font-size: 13px;
+      line-height: 1.45;
+      margin-top: 18px;
+      max-width: 420px;
+    }
+
+    .work-card .arrow {
+      position: absolute;
+      right: 18px;
+      bottom: 15px;
+      font-size: 20px;
+    }
+
+    /* ---------------- BACKGROUND ---------------- */
+
+    .background-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 35px;
+    }
+
+    .background-statement {
+      font-family: var(--display);
+      font-size: 45px;
+      line-height: .9;
+      text-transform: uppercase;
+    }
+
+    .timeline {
+      list-style: none;
+      border-top: 1px solid var(--ink);
+    }
+
+    .timeline li {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 20px;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .timeline .date {
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    .timeline h3 {
+      font-family: var(--serif);
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .timeline p {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* ---------------- CONTACT ---------------- */
+
+    .contact {
+      background: var(--ink);
+      color: var(--white);
+      padding: 40px 34px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: end;
+    }
+
+    .contact h2 {
+      font-family: var(--display);
+      font-size: clamp(50px, 8vw, 100px);
+      line-height: .8;
+      letter-spacing: -.05em;
+      text-transform: uppercase;
+    }
+
+    .contact p {
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.4;
+      margin-bottom: 25px;
+      max-width: 480px;
+    }
+
+    .contact a {
+      display: inline-block;
+      font-family: var(--display);
+      font-size: 22px;
+      text-decoration: none;
+      border-bottom: 3px solid var(--yellow);
+      padding-bottom: 3px;
+    }
+
+    /* ---------------- FOOTER ---------------- */
+
+    footer {
+      padding: 20px 34px 30px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    /* ---------------- MOBILE ---------------- */
+
+    @media (max-width: 760px) {
+
+      .pad {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .header-main {
+        flex-direction: column;
+        gap: 25px;
+      }
+
+      .header-meta {
+        text-align: left;
+      }
+
+      nav {
+        justify-content: flex-start;
+        gap: 15px;
+        flex-wrap: wrap;
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .hero-grid,
+      .system-grid,
+      .background-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-aside {
+        border-left: none;
+        border-top: 1px solid var(--ink);
+        padding-left: 0;
+        padding-top: 20px;
+      }
+
+      .data-strip {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .data-card + .data-card {
+        border-left: none;
+      }
+
+      .data-card:nth-child(2),
+      .data-card:nth-child(4) {
+        border-left: 1px solid var(--ink);
+      }
+
+      .work-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline li {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+
+      .contact {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      footer {
+        padding-left: 18px;
+        padding-right: 18px;
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <header>
+
+    <div class="header-main pad">
+
+      <div class="brand">
+        MATT<br>BODDIE
+
+        <small>
+          PUBLIC HEALTH SYSTEMS<br>
+          MALARIA · DATA · FIELD OPERATIONS
+        </small>
+      </div>
+
+      <div class="header-meta">
+        SYSTEMS ARCHITECT<br>
+        MALARIA PROGRAMS<br>
+        DHIS2<br>
+        DIGITAL HEALTH
+      </div>
+
+    </div>
+
+    <div class="color-bar">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <nav class="pad">
+      <a href="#work">01 Work</a>
+      <a href="#systems">02 Systems</a>
+      <a href="#background">03 Background</a>
+      <a href="#contact">04 Contact</a>
+    </nav>
+
+  </header>
+
+
+  <main>
+
+    <!-- HERO -->
+
+    <section class="hero section pad">
+
+      <div class="section-label">
+        <span class="section-number">01</span>
+        <span>Public health infrastructure</span>
+        <span class="section-rule"></span>
+      </div>
+
+      <div class="hero-grid">
+
+        <div>
+
+          <h1>
+            DATA SYSTEMS<br>
+            FOR THE<br>
+            REAL WORLD.
+          </h1>
+
+          <p class="hero-intro">
+            I build the digital infrastructure behind malaria and public
+            health programs — from field data collection to national
+            DHIS2 platforms, surveillance systems, dashboards, and the
+            pipelines connecting them.
+          </p>
+
+        </div>
+
+        <aside class="hero-aside">
+
+          <h3>
+            Same data.<br>
+            Better systems.<br>
+            Better decisions.
+          </h3>
+
+          <p>
+            My work sits between public health programs and the technology
+            required to make them measurable, manageable, and useful.
+          </p>
+
+          <div class="coordinates">
+            GLOBAL HEALTH / FIELD SYSTEMS / DIGITAL PUBLIC HEALTH
+          </div>
+
+        </aside>
+
+      </div>
+
+      <div class="hero-art"></div>
+
+    </section>
+
+
+    <!-- NUMBERS -->
+
+    <section class="section pad">
+
+      <div class="data-strip">
+
+        <div class="data-card">
+          <div class="data-number">15+</div>
+          <div class="data-label">
+            National malaria programs supported
+          </div>
+        </div>
+
+        <div class="data-card">
+          <div class="data-number">10+</div>
+          <div class="data-label">
+            Years working in malaria & digital health
+          </div>
+        </div>
+
+        <div class="data-card">
+          <div class="data-number">DHIS2</div>
+          <div class="data-label">
+            National-scale information systems
+          </div>
+        </div>
+
+        <div class="data-card">
+          <div class="data-number">FIELD</div>
+          <div class="data-label">
+            Designed for the conditions where data actually happens
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SYSTEMS -->
+
+    <section class="section pad" id="systems">
+
+      <div class="section-label">
+        <span class="section-number">02</span>
+        <span>The system</span>
+        <span class="section-rule"></span>
+      </div>
+
+      <div class="system-grid">
+
+        <div class="system-diagram">
+
+          <h3>
+            Field<br>
+            to decision
+          </h3>
+
+          <div class="flow">
+
+            <div class="flow-item">
+              <span>01 / Field teams</span>
+              <span>→</span>
+            </div>
+
+            <div class="flow-item">
+              <span>02 / Mobile collection</span>
+              <span>→</span>
+            </div>
+
+            <div class="flow-item">
+              <span>03 / DHIS2 + data pipelines</span>
+              <span>→</span>
+            </div>
+
+            <div class="flow-item">
+              <span>04 / Analysis + decision</span>
+              <span>✓</span>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="system-copy">
+
+          <h2>
+            The technology<br>
+            is only half<br>
+            the problem.
+          </h2>
+
+          <p>
+            A technically elegant system is useless if a spray supervisor
+            cannot use it in the field, if the database cannot handle the
+            campaign, or if the resulting data cannot answer the question
+            someone needs answered on Monday morning.
+          </p>
+
+          <ul>
+            <li>DHIS2 architecture & administration</li>
+            <li>Surveillance & campaign systems</li>
+            <li>Mobile / offline data collection</li>
+            <li>Data pipelines & integrations</li>
+            <li>Dashboards & program indicators</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- WORK -->
+
+    <section class="section pad" id="work">
+
+      <div class="section-label">
+        <span class="section-number">03</span>
+        <span>Selected work</span>
+        <span class="section-rule"></span>
+      </div>
+
+      <div class="work-grid">
+
+        <article class="work-card">
+
+          <div class="index">01 / NATIONAL SYSTEMS</div>
+
+          <h3>
+            IRS MODULE<br>
+            INTEGRATION
+          </h3>
+
+          <p>
+            Built a customized indoor residual spraying module inside a
+            national Ministry of Health DHIS2 instance ahead of an active
+            spray campaign.
+          </p>
+
+          <div class="arrow">→</div>
+
+        </article>
+
+
+        <article class="work-card">
+
+          <div class="index">02 / PLATFORM ENGINEERING</div>
+
+          <h3>
+            DHIS2<br>
+            UPGRADES
+          </h3>
+
+          <p>
+            Led national malaria programs through complex DHIS2 upgrades,
+            including breaking-change audits, testing, migration planning,
+            and phased deployment.
+          </p>
+
+          <div class="arrow">→</div>
+
+        </article>
+
+
+        <article class="work-card">
+
+          <div class="index">03 / CAMPAIGN DATA</div>
+
+          <h3>
+            30 DAYS.<br>
+            REAL-TIME DATA.
+          </h3>
+
+          <p>
+            Built campaign tracking using DHIS2 program indicators to
+            monitor progress and burn-rate during an active IRS campaign.
+          </p>
+
+          <div class="arrow">→</div>
+
+        </article>
+
+
+        <article class="work-card">
+
+          <div class="index">04 / FIELD OPERATIONS</div>
+
+          <h3>
+            DATA THAT<br>
+            WORKS OFFLINE.
+          </h3>
+
+          <p>
+            Designed XLSForms and mobile workflows for supervision,
+            distribution, and day-of-spray activities in environments
+            where connectivity cannot be assumed.
+          </p>
+
+          <div class="arrow">→</div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- BACKGROUND -->
+
+    <section class="section pad" id="background">
+
+      <div class="section-label">
+        <span class="section-number">04</span>
+        <span>Background</span>
+        <span class="section-rule"></span>
+      </div>
+
+      <div class="background-grid">
+
+        <div class="background-statement">
+          FIELD<br>
+          EXPERIENCE<br>
+          CHANGES<br>
+          HOW YOU<br>
+          BUILD DATA.
+        </div>
+
+        <ol class="timeline">
+
+          <li>
+            <div class="date">
+              Uganda
+            </div>
+
+            <div>
+              <h3>Peace Corps</h3>
+              <p>
+                Began working in malaria program operations at the
+                field level.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <div class="date">
+              Uganda
+            </div>
+
+            <div>
+              <h3>Abt Associates</h3>
+              <p>
+                Worked directly with indoor residual spraying campaign
+                field operations.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <div class="date">
+              ~10 years
+            </div>
+
+            <div>
+              <h3>DHIS2 Solutions Architecture</h3>
+              <p>
+                Designed and managed national-scale surveillance and
+                vector-control information systems.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <div class="date">
+              Current
+            </div>
+
+            <div>
+              <h3>PMI Evolve</h3>
+              <p>
+                Systems and MEL technical leadership across data
+                infrastructure, pipelines, administration, and
+                program evidence.
+              </p>
+            </div>
+          </li>
+
+        </ol>
+
+      </div>
+
+    </section>
+
+
+    <!-- TOOLBOX -->
+
+    <section class="section pad">
+
+      <div class="section-label">
+        <span class="section-number">05</span>
+        <span>Working toolkit</span>
+        <span class="section-rule"></span>
+      </div>
+
+      <div class="data-strip">
+
+        <div class="data-card">
+          <div class="data-number">DHIS2</div>
+          <div class="data-label">
+            Architecture / administration / tracker / analytics
+          </div>
+        </div>
+
+        <div class="data-card">
+          <div class="data-number">ODK</div>
+          <div class="data-label">
+            XLSForms / mobile collection / offline workflows
+          </div>
+        </div>
+
+        <div class="data-card">
+          <div class="data-number">DATA</div>
+          <div class="data-label">
+            PostgreSQL / PostGIS / APIs / pipelines
+          </div>
+        </div>
+
+        <div class="data-card">
+          <div class="data-number">VIZ</div>
+          <div class="data-label">
+            Dashboards / indicators / decision support
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section class="contact" id="contact">
+
+      <div class="contact-grid">
+
+        <div>
+          <h2>
+            Let's build<br>
+            something<br>
+            useful.
+          </h2>
+        </div>
+
+        <div>
+
+          <p>
+            I'm currently taking on consulting work in malaria, public
+            health information systems, data visualization, and mobile
+            data deployment.
+          </p>
+
+          <a href="mailto:matt@mattboddie.com">
+            matt@mattboddie.com
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+
+    <span>
+      MATTBODDIE.COM
+    </span>
+
+    <span>
+      MALARIA / DATA / SYSTEMS / FIELD
+    </span>
+
+  </footer>
+
+</div>
+
+</body>
+</html>
