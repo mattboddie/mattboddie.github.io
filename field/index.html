@@ -397,11 +397,19 @@
     }
 
     .work-card {
+      display: block;
       border: 1px solid var(--ink);
       padding: 20px;
       min-height: 220px;
       background: var(--white);
       position: relative;
+      text-decoration: none;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+
+    .work-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 4px 4px 0 var(--ink);
     }
 
     .work-card:nth-child(2) {
@@ -445,6 +453,11 @@
       right: 18px;
       bottom: 15px;
       font-size: 20px;
+      transition: transform .15s ease;
+    }
+
+    .work-card:hover .arrow {
+      transform: translateX(4px);
     }
 
     /* ---------------- BACKGROUND ---------------- */
@@ -847,7 +860,7 @@
 
       <div class="work-grid">
 
-        <article class="work-card">
+        <a class="work-card" href="/work/irs-module-integration.html">
 
           <div class="index">01 / NATIONAL SYSTEMS</div>
 
@@ -864,10 +877,10 @@
 
           <div class="arrow">→</div>
 
-        </article>
+        </a>
 
 
-        <article class="work-card">
+        <a class="work-card" href="/work/dhis2-upgrades.html">
 
           <div class="index">02 / PLATFORM ENGINEERING</div>
 
@@ -884,10 +897,10 @@
 
           <div class="arrow">→</div>
 
-        </article>
+        </a>
 
 
-        <article class="work-card">
+        <a class="work-card" href="/work/campaign-data.html">
 
           <div class="index">03 / CAMPAIGN DATA</div>
 
@@ -903,10 +916,10 @@
 
           <div class="arrow">→</div>
 
-        </article>
+        </a>
 
 
-        <article class="work-card">
+        <a class="work-card" href="/work/field-operations.html">
 
           <div class="index">04 / FIELD OPERATIONS</div>
 
@@ -923,7 +936,7 @@
 
           <div class="arrow">→</div>
 
-        </article>
+        </a>
 
       </div>
 
